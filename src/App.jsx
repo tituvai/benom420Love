@@ -1,26 +1,65 @@
 
+import { useState } from 'react'
 import './App.css'
-import Image from './components/Image'
 import titu from '/src/assets/difule.png'
+import img1 from '/src/assets/1.png'
+import img2 from '/src/assets/2.png'
+import img3 from '/src/assets/3.png'
+import img4 from '/src/assets/4.png'
 
 function App() {
-  
+  const images=[img1, img2, img3, img4]
+  const [inputText, setInputText] = useState('');
+  const [imageSource, setImageSource] = useState(titu); // ডিফল্ট ইমেজ
+
+  const handleLoveClick = () => {
+    if (inputText.trim() === '') {
+      alert('দয়া করে আপনার নাম লিখুন');
+      return;
+    }
+
+
+     const inputPattern = /^[\w\s]+\s*\+\s*[\w\s]+$/; // নাম + নাম ফরম্যাট (যেমন, Titu + Disha)
+    if (!inputPattern.test(inputText.trim())) {
+      alert('ইনপুট ফরম্যাট ভুল! দয়া করে "নাম + নাম" ফরম্যাটে লিখুন (যেমন, Titu + Disha)');
+      return;
+    }
+
+     const normalizedInput = inputText.trim().toLowerCase();
+    if (normalizedInput === 'titu + disha' || normalizedInput === 'disha + titu' || normalizedInput === 'disha+titu' || normalizedInput === 'titu+disha') {
+      setImageSource(img2);
+    } else{
+      const randomNumber = Math.floor(Math.random() * images.length);
+    setImageSource(images [randomNumber]);
+    setInputText(''); // ইনপুট ফিল্ড খালি করা
+    }
+
+    
+  };
 
   return (
     <>
-    <div className="w-[600px] m-auto">
-    <div className="mockup-phone">
-    <div className="mockup-phone-camera"></div>
-    <div className="mockup-phone-display text-white grid place-content-center bg-neutral-900">
-      <div className="">
-        <Image imgSrc={titu}/>
+      <div className="container">
+      <div className="header">
+        <h1>আপনার লাকি নম্বর</h1>
       </div>
-      <div className="pt-10 m-auto">
-        <input className='bg-stone-500 w-[200px] p-2 placeholder:text-white placeholder:italic placeholder:text-sm rounded ' type="text" placeholder='Enter A Name'/>
-        <button className='px-5 py-2 ml-3 rounded bg-green-500'>Submit</button>
+      <div className="loveImg">
+        <picture>
+          <img src={imageSource} alt="lucky number" id="ludo" />
+        </picture>
       </div>
-    </div>
-    </div>
+      <div className="loveBtn">
+        <input
+          type="text"
+          placeholder="আপনার নাম লিখুন"
+          id="display"
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+        />
+        <button id="btn" onClick={handleLoveClick}>
+          এখন ক্লিক করুন
+        </button>
+      </div>
     </div>
     </>
   )
