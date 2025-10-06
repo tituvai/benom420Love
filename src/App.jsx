@@ -10,18 +10,19 @@ import img4 from '/src/assets/4.png'
 function App() {
   const images=[img1, img2, img3, img4]
   const [inputText, setInputText] = useState('');
-  const [imageSource, setImageSource] = useState(titu); // ডিফল্ট ইমেজ
-
+  const [imageSource, setImageSource] = useState(titu);
+  const [error, setError]= useState('') 
+const [textError, setTextError]= useState('')
   const handleLoveClick = () => {
     if (inputText.trim() === '') {
-      alert('দয়া করে আপনার নাম লিখুন');
+      setTextError('Enter your text');
       return;
     }
 
 
-     const inputPattern = /^[\w\s]+\s*\+\s*[\w\s]+$/; // নাম + নাম ফরম্যাট (যেমন, Titu + Disha)
+     const inputPattern = /^[\w\s]+\s*\+\s*[\w\s]+$/; 
     if (!inputPattern.test(inputText.trim())) {
-      alert('ইনপুট ফরম্যাট ভুল! দয়া করে "নাম + নাম" ফরম্যাটে লিখুন (যেমন, Titu + Disha)');
+      setError('Enter A Name + Name')
       return;
     }
 
@@ -29,9 +30,9 @@ function App() {
     if (normalizedInput === 'titu + disha' || normalizedInput === 'disha + titu' || normalizedInput === 'disha+titu' || normalizedInput === 'titu+disha') {
       setImageSource(img2);
     } else{
-      const randomNumber = Math.floor(Math.random() * images.length);
+    const randomNumber = Math.floor(Math.random() * images.length);
     setImageSource(images [randomNumber]);
-    setInputText(''); // ইনপুট ফিল্ড খালি করা
+    setInputText(''); 
     }
 
     
@@ -51,6 +52,8 @@ function App() {
       <div className="text-center py-5">
         <input className='text-sm text-white bg-stone-700 p-2 w-[200px] rounded outline-0' type="text" placeholder="Enter a Name" value={inputText} onChange={(e) => setInputText(e.target.value)} />
         <button className='bg-green-500 py-2 px-5 rounded ml-5 text-sm text-white ' onClick={handleLoveClick}>Submit</button>
+        <p className='text-red-500 text-sm font-medium py-1'>{error}</p>
+        <p className='text-red-500 text-sm font-medium py-1'>{textError}</p>
       </div>
     </div>
     </>
