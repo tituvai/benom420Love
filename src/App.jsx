@@ -49,7 +49,7 @@ function App() {
         </picture>
       </div>
       <div className="text-center py-5">
-        <input className='text-sm bg-white p-2 w-[200px] rounded outline-0' type="text" placeholder="Enter a Name" value={inputText} onChange={(e) => setInputText(e.target.value)} />
+        <input className='text-sm text-white bg-stone-700 p-2 w-[200px] rounded outline-0' type="text" placeholder="Enter a Name" value={inputText} onChange={(e) => setInputText(e.target.value)} />
         <button className='bg-green-500 py-2 px-5 rounded ml-5 text-sm text-white ' onClick={handleLoveClick}>Submit</button>
       </div>
     </div>
