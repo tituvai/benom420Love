@@ -39,26 +39,18 @@ function App() {
 
   return (
     <>
-      <div className="container">
+      <div className="max-w-[600px] lg-w-full bg-black px-2 py-10">
       <div className="header">
-        <h1>আপনার লাকি নম্বর</h1>
+        <h1 className=' text-2xl text-green-500 font-black italic text-center py-5'>Love Circle</h1>
       </div>
       <div className="loveImg">
         <picture>
-          <img src={imageSource} alt="lucky number" id="ludo" />
+          <img className='w-full' src={imageSource} alt="lucky number" id="ludo" />
         </picture>
       </div>
-      <div className="loveBtn">
-        <input
-          type="text"
-          placeholder="আপনার নাম লিখুন"
-          id="display"
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-        />
-        <button id="btn" onClick={handleLoveClick}>
-          এখন ক্লিক করুন
-        </button>
+      <div className="text-center py-5">
+        <input className='text-sm bg-white p-2 w-[200px] rounded outline-0' type="text" placeholder="Enter a Name" value={inputText} onChange={(e) => setInputText(e.target.value)} />
+        <button className='bg-green-500 py-2 px-5 rounded ml-5 text-sm text-white ' onClick={handleLoveClick}>Submit</button>
       </div>
     </div>
     </>
